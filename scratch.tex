@@ -1,0 +1,156 @@
+
+
+\subsection{section on immutability}
+
+We have already covered some basics of assignment statements in section 3.4 when we assigned a variable to a numerical value. This allows us to keep track of our values and work with for later use as in mathematical equations. 
+%come back to this and connect it to mutability
+One important concept to cover is mutability where all python objects are either mutable or immutable. In other words, these refer to things that can change is state or contents or not. We've worked with an example of each already. For example, lists would be an example of a mutable object; we can change its contents once it's been created. Take for instance the first sentence from the novel Moby Dick. 
+%clean this up or maybe use a different example
+
+\begin{python}
+sent = ['call', 'me','Ismael', '.']
+\end{python}
+
+In this particular example we assigned the variable, \textbf{sent}, to hold a value which is a list of words. We can use a list attribute such as \textbf{.pop} to demonstrate mutability. The \textbf{.pop()} literally pops off the last item in a list. In this case we will remove the period in the sentence. 
+\begin{python}
+sent = ['call', 'me','Ismael', '.']
+sent.pop()
+=> ['call', 'me','Ismael']
+\end{python}
+
+As we print our sentence we can see the contents of our list object has changed. This will be true for other mutable objects like dictionaries and arrays \footnote{maybe make a note about arrays beyond beyond the scope of this introductory packet but that they are similar to lists...}. immutable objects on the other hand do not change. If we take the same sentence and represent it as a string, we can attempt to change it with the \textbf{.replace()} attribute and see what happens. 
+
+\begin{python}
+sent = "call me Ismael."
+sent = sent.replace("Ismael", "name")
+sent
+=> "call me name."
+\end{python}
+
+What's interesting here is that the string appears to have changed. But what's really going on behind the scenes? Actually, instead of changing the string we just created a new one that is different than our original. Essentially, a new string is produced in memory. We can test this by assigning our sentence to another variable and create a copy.
+
+\begin{python}
+sent = "call me Ismael."
+sent_2 = sent
+sent = sent.replace("Ismael", "name")
+sent
+=> "call me name."
+sent_2
+=> "call me Ismael."
+\end{python}
+
+sent\_2 retained the original sentence in memory while the sent became a newly created string. So there was in fact not actual change occurring. Again, this is because strings, like integers (1,100, 345), are immutable. 
+
+%connect about to assignments
+
+So how does this relate to assignment? If you assign a variable to a value you have to keep in mind whether the object is mutable or not, and therefore, whether or not assigning a value to another name will bring changes to the original object or create a new distinct one. 
+
+
+
+\subsection{If-statements and truthiness}
+%booloean values
+%basic control flow
+%use example data from NLTK
+
+\subsection{Loops}
+
+% go through basic loop
+% importance for looping through textual data
+
+list comprehensions
+
+\subsection{Dictionaries}
+
+% introduce dictionaries and relate them to how actual dictionaries. hello:hola
+% use loop to create a word count dictionary from actual nltk corpus
+
+Dictionaries are another built-in data type that can help use store and access items for later, similarly to lists. Just like the name denotes, this data type is comparable to an actual dictionary where it holds a key value pair. If we think in terms of a Spanish-English dictionary, we can think of an English word like "hello" as a key and the Spanish word "hola" as the value. This is the \textbf{key:value} pair- hello:hola. formally what is happening here is that keys are mapped onto values, where a key is any immutable data type and a value can be any data type (lists, strings, integers, dictionaries, \footnote{It is possible to have dictionaries within dictionaries} etc.). A dictionary is usually represented with \textbf{curly brackets} and keys and values separated a with colon. Let's create a small two word Spanish dictionary to see how this works. 
+
+\begin{python}
+spanish_dictionary = {}
+\end{python}
+
+This assignment initializes our dictionary which is currently empty. But then we can start adding keys and values with the format \textit{ dictionary[key] = value}.
+
+\begin{python}
+spanish_dictionary = {}
+spanish_dictionary["hello"] = "hola"
+spanish_dictionary["goodbye"] = "adios"
+\end{python}
+
+Now if we print our dictionary we can see it's contents.
+
+\begin{python}
+spanish_dictionary
+=> {'hello': 'hola', 'goodbye': 'adois'}
+\end{python}
+
+So now that we have our small dictionary, how might we want to look-up these key-value pairs or other information from our dictionary? We can use the simple indexing notation \textbf{dictionary[key]}. 
+
+\begin{python}
+spanish_dictionary["hello"]
+=> "hola"
+\end{python}
+
+% discuss or list other useful dictionary methods later like .keys() etc.
+
+Moving beyond this example, we can use dictionaries for a variety of other purposes, like holding word frequencies from a text. Let's work \textit{Moby Dick} from NLTK and create our word frequency dictionary. In NLTK assignes the the variable \textbf{text1} is Herman Mellville's \textit{Moby Dick}, so we will use \textbf{text1} in this example. 
+
+\begin{python}
+text1 
+=> <Text: Moby Dick by Herman Melville 1851>
+\end{python}
+
+First we will create our empty word frequency dictionary; call it \textbf{word\_freq}.
+
+\begin{python}
+word_freq = {}
+\end{python}
+
+Think about how we might want to scan this text to look at all of the words. From what we know so far, loops will be useful for this task as they will allow us to loop through the text and check every word. Along the way we can make a tally of ever time a certain word occurs. Describing this algorithm in a pseudocodey way, we want to loop through the text, if we haven't seen it before, add it to the dictionary, or else if we have seen the word already, add a count value to it. This can be realized as:
+
+\begin{python}
+word_freq = {}
+#loop through all words in text1
+for word in text1:
+    #if word is not in dictionary, give it a value 1
+    if word not in word_freq:
+        #create key:value pair
+        word_freq[word] = 1
+    #if we have seen it, add a count value of 1
+    else:
+        #update key:value pair
+        word_freq[word] += 1
+\end{python}
+
+Now we have created our dictionary. Let's see if we can look up a word a find it's frequency. Again, we will look-up a word with the indexing format \textit{dictionary[word]\footnote{Remember to have the word surrounded by quotes since it's a string data type}}.
+\begin{python}
+word_freq["befooled"]
+=> 1
+word_freq["ports"]
+=> 7
+\end{python}
+Congratulations! You now have a word frequency dictionary. This is certainly a useful tool to have for many language analysis, but you can imagine other practical uses of a dictionary to hold key value pairs. One might want to store multiple pieces of information for one variable like  sociolinguistic metadata for a document or speaker. 
+
+Here is a list of other common dictionary methods that you can try out on the frequency dictionary:
+
+\begin{python}
+#returns the items in your dictionary; all the key:value pairs
+word_freq.items()
+
+#returns all of the keys in your dictionary
+word_freq.keys()
+
+#returns all of the values in your dictionary
+word_freq.values()
+
+#removes the elements in the dictionary
+word_freq.clear()
+
+#Return the value of a key
+word_freq.get('padlocks')
+=> 1
+\end{python}
+
+\subsection{Input and output}
+

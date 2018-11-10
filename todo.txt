@@ -1,0 +1,33 @@
+topics:
+- string functions: lower, upper, find, rfind
+- note on indentation adn comments
+- control flow: 
+  - boolean operators
+  - if else elif
+  - fizzbuzz exercise
+
+plan: 
+- use text collocations
+- for loop, if to see if a sentence contains Alice said
+- use concordance
+- for loop with range int
+
+
+pieces of paper:
+- collect a feedback form
+- prepare a companion cheat sheet
+
+
+nltk layout:
+- 
+
+nltk.Text
+nltk.download('stopwords')
+t.collocations()
+t.similar('alice')
+t.similar('rabbit')
+
+
+https://likeinamirror.wordpress.com/2013/12/01/satoshi-nakamoto-is-probably-nick-szabo/
+
+https://arxiv.org/search/advanced?advanced=&terms-0-term=&terms-0-operator=AND&terms-0-field=acm_class&classification-computer_science=y&classification-physics_archives=all&date-filter_by=specific_year&date-year=2008&date-from_date=&date-to_date=&date-date_type=submitted_date&abstracts=show&size=200&order=-announced_date_first
